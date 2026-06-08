@@ -3,19 +3,25 @@
 
 #include <iostream>
 #include <vector>
+#include <list>
+#include <deque>
 #include <algorithm>
+#include <exception>
+
+class ValueNotFoundException : public std::exception {
+	const char* what() const throw() {
+		return "Value not found in the container.";
+	}
+};
 
 template <typename T>
 void easyfind(T &container, int value) {
-	std::find_first_of(value, container);
+	typename T::iterator it = std::find(container.begin(), container.end(), value);;
+	if (it != container.end()) {
+		std::cout << "Found " << value << " in the container." << std::endl;
+	} else {
+		throw ValueNotFoundException();
+	}
 }
 
-
 #endif
-
-
-/*Write a function template easyfind that accepts a type T. It takes two parameters:
-the first one is of type T, and the second one is an integer.
-Assuming T is a container of integers, this function has to find the first occurrence
-of the second parameter in the first parameter.
-If no occurrence is found, you can either throw an exception or return an error value*/
