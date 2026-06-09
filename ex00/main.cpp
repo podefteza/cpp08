@@ -71,5 +71,34 @@ int main () {
 		std::cerr << e.what() << std::endl;
 	}
 
+	////////////////////////// TESTING CONST /////////////////////////
+	std::cout << std::endl << "Testing with a const vector, list and deque..." << std::endl;
+	const int vec_vals[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+	const int list_vals[] = {3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40};
+	const int deque_vals[] = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60};
+
+	const std::vector<int> multiples_of_1_and_2(vec_vals, vec_vals + 20);
+	const std::list<int> multiples_of_3_and_4(list_vals, list_vals + 20);
+	const std::deque<int> multiples_of_5_and_6(deque_vals, deque_vals + 20);
+
+	try {
+		std::cout << "Looking for 6 in multiples_of_1_and_2: ";
+		easyfind(multiples_of_1_and_2, 6);
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		std::cout << "Looking for 12 in multiples_of_3_and_4: ";
+		easyfind(multiples_of_3_and_4, 12);
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		std::cout << "Looking for 30 in multiples_of_5_and_6: ";
+		easyfind(multiples_of_5_and_6, 30);
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
 	return 0;
 }
