@@ -2,8 +2,11 @@
 #define SPAN_HPP
 
 #include <vector>
+#include <list>
+#include <deque>
 #include <stdexcept>
 #include <algorithm>
+#include <iostream>
 
 class Span {
 	private:
