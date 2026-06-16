@@ -24,11 +24,9 @@ class Span {
 		template <typename Iterator>
 		void addNumber(Iterator first, Iterator last)
 		{
-			std::vector<int> tmp(first, last);
-
-			if (numbers.size() + tmp.size() > maxSize)
+			if (numbers.size() + std::distance(first, last) > maxSize)
 				throw std::runtime_error("Span is full");
-			numbers.insert(numbers.end(), tmp.begin(), tmp.end());
+			numbers.insert(numbers.end(), first, last);
 		}
 
 		int shortestSpan() const;

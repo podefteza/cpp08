@@ -120,5 +120,3 @@ int main()
 
 	return 0;
 }
-
-// difference between types of containers: vector, list, deque are the one's used here...

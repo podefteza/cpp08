@@ -89,7 +89,7 @@ int main () {
 	}
 	try {
 		std::cout << "Looking for 12 in multiples_of_3_and_4: ";
-		easyfind(multiples_of_3_and_4, 12);
+		easyfind(multiples_of_3_and_4, 42);
 	} catch (const std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
