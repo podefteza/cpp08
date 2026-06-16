@@ -10,11 +10,29 @@ Before diving into the exercises, let's break down the four core concepts you ne
 Templates are a way to write generic code. Instead of writing one function to find a number in an array of `int`s and another for an array of `float`s, you write a *single template function*. The compiler then dynamically generates the correct version of the function based on the type of data you pass to it. It's like a blueprint for code.
 
 ### 2. Containers
-Containers are pre-built classes in C++ that store collections of data. You don't have to write your own linked lists or dynamic arrays anymore!
-- `std::vector`: A dynamic array that can grow in size.
-- `std::list`: A doubly linked list.
-- `std::deque`: A double-ended queue (you can insert/remove from both ends).
-- `std::stack`: A LIFO (Last-In-First-Out) data structure.
+Containers are pre-built classes in C++ that store collections of data. You don't have to write your own linked lists or dynamic arrays anymore! Different containers are optimized for different tasks. Here is a beginner's cheat sheet on the most common ones:
+
+#### Sequence Containers (Store data in a linear order)
+- **`std::vector` (Dynamic Array)**
+  - **Pros:** Fast random access (e.g., `v[5]`) in **O(1)** time. Very cache-friendly (stored in contiguous memory). Adding/removing at the end is fast **O(1)**.
+  - **Cons:** Inserting or removing elements in the middle or front is slow **O(N)** because every subsequent element must be shifted over in memory.
+  - **When to use:** This should be your **default choice** 95% of the time!
+
+- **`std::list` (Doubly Linked List)**
+  - **Pros:** Inserting or removing elements *anywhere* is blazing fast **O(1)** (assuming you already have an iterator pointing to that spot).
+  - **Cons:** No random access! You cannot do `l[5]`. To find the 5th element, you must manually iterate through the first 4 **O(N)**. High memory overhead (each element stores pointers to the next/prev nodes). Poor cache locality.
+  - **When to use:** When you have massive amounts of data and your primary action is constantly inserting/deleting items in the middle of it all.
+
+- **`std::deque` (Double-Ended Queue)**
+  - **Pros:** Like a vector, it has fast random access **O(1)**. Unlike a vector, it can also quickly add/remove elements at the *front* **O(1)**.
+  - **Cons:** Slightly heavier and slower than a vector under the hood because its memory is stored in chunks rather than one giant contiguous block.
+  - **When to use:** When you need vector-like behavior, but also need to frequently push/pop from the very beginning.
+
+#### Container Adaptors (Wrappers around other containers)
+- **`std::stack` (LIFO - Last-In, First-Out)**
+  - **Pros:** Restricts access to strictly enforce the LIFO rule. You can only push, pop, and look at the `top()` element.
+  - **Cons:** By design, it completely hides iterators, meaning **you cannot loop through it** (unless you hack it, which is exactly what we do in Exercise 02!).
+  - **When to use:** Undo/Redo mechanisms, parsing math expressions, or backtracking algorithms (like solving a maze).
 
 ### 3. Iterators
 Think of iterators as "smart pointers" for containers. They let you traverse (loop through) a container without needing to know how that container is built under the hood.
