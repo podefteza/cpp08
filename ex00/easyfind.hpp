@@ -27,7 +27,4 @@ typename T::const_iterator easyfind(const T &container, int value) {
 	return i;
 }
 
-// the incrementation of the index is done by std::find; i is the iterator, like a pointer to the value found
-// using std::runtime_error allows us to throw an exception with a custom message, unlike std::exception where we'd have to override the what() method
-
 #endif

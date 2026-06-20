@@ -14,6 +14,7 @@ class Span {
 		unsigned int maxSize;
 
 	public:
+		Span();
 		Span(unsigned int n);
 		Span(const Span &other);
 		Span &operator=(const Span &other);

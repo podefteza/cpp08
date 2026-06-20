@@ -1,6 +1,9 @@
 #include "Span.hpp"
 #include <limits>
 
+Span::Span() : maxSize(0) {
+}
+
 Span::Span(unsigned int n) : maxSize(n) {
 }
 
