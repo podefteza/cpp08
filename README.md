@@ -77,3 +77,15 @@ The STL includes a bunch of pre-written functions that operate on ranges of elem
 - We created standard iterator methods like `begin()`, `end()`, `rbegin()` (reverse begin), and `rend()` (reverse end) inside `MutantStack`.
 - These methods simply reach into the underlying container `c` and return *its* iterators (e.g., `return this->c.begin();`).
 - The result? We get an object that functions exactly like a normal `std::stack`, but can also be looped through like a `std::vector` or `std::list`. We proved this in `main.cpp` by getting identical output whether we used our `MutantStack`, a `std::vector`, or a `std::list`.
+
+---
+
+## Container Summary Table
+
+The table below explains the specific containers used in each exercise and why they are well-suited for their tasks:
+
+| Exercise | Containers Used | Why it is good / suited for the specific exercise |
+| :--- | :--- | :--- |
+| **[Exercise 00: Easy find](file:///home/carlos-j/Desktop/cpp08/ex00)** | `std::vector`<br>`std::list`<br>`std::deque` | The exercise template function `easyfind` in `easyfind.hpp` needs to search for an integer in any container. These three sequence containers are perfect because they all implement **forward iterators** (`begin()` and `end()`), allowing `std::find` to traverse and search them uniformly. |
+| **[Exercise 01: Span](file:///home/carlos-j/Desktop/cpp08/ex01)** | `std::vector` | The `Span` class internally uses `std::vector<int>`. A vector is ideal here because:<br>1. Calculating spans (shortest and longest) requires sorting the numbers. `std::sort` requires **Random Access Iterators**, which `std::vector` provides.<br>2. It stores elements contiguously in memory, ensuring optimal CPU cache locality for sorting and traversal performance.<br>3. Appending individual elements is fast (amortized $O(1)$).<br>4. It supports efficient range insertion via iterators to add thousands of numbers at once. |
+| **[Exercise 02: MutantStack](file:///home/carlos-j/Desktop/cpp08/ex02)** | `std::stack`<br>(underlying `std::deque`) | The goal of `MutantStack` is to make a `std::stack` iterable. `std::stack` is a **container adaptor** that wraps another container (defaulting to `std::deque`) to enforce a strict LIFO interface. `std::deque` is excellent for this because it allocates memory in chunks (avoiding massive reallocations when growing) and offers $O(1)$ insertions/deletions at both ends. By inheriting from `std::stack`, we can access its protected member `c` (the underlying deque) and expose its iterators. |
